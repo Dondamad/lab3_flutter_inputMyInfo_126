@@ -101,7 +101,14 @@ class _registerPageState extends State<registerPage> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      print('pass');
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) => buildSheet(),
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(20)),
+                        ),
+                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -121,6 +128,36 @@ class _registerPageState extends State<registerPage> {
       ),
     );
   }
+
+  buildSheet() => Container(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Text(
+                'ชื่อ : ${_firstname.text} ${_lastname.text}',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+              ),
+              Text(
+                'รหัสนิสิต : ${_stdID.text}',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+              ),
+              Text(
+                'คณะ : ${_selectedFacultyItem!.facultyThName}',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+              ),
+              Text(
+                'สาขา : ${groupBranch} ปี ${groupYear}',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+              ),
+              Text(
+                'วิชาที่ชอบ : ${subjectChecked}',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+              ),
+            ],
+          ),
+        ),
+      );
 
   List<Widget> buildSubjectCheckbox() {
     List<Widget> listSubject = [];
